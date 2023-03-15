@@ -18,26 +18,35 @@ class GameBoardViewController: UIViewController {
             self.view.backgroundColor = UIColor(patternImage: backGroundPattern)
         }
         
-        var posX:CGFloat = 0
-        let width = (self.view.bounds.width / 7)-2.5
+        let ratio = 1.27
+        let widthPadding = 2.5
+        let cardLeftTopX:CGFloat = 0
+        let cardRightTopY:CGFloat = 50
+        let cardCount:CGFloat = 7
+        var positionX:CGFloat = cardLeftTopX
+        let cardWidth = (self.view.bounds.width / cardCount) - widthPadding
+        var cardBackImage:UIImage? = nil
+        if let cardBack = UIImage(named: "card-back") {
+            cardBackImage = cardBack
+        }
+        
         for _ in 0 ... 6 {
-            var posY:CGFloat = 50
-            
+            var positionY:CGFloat = cardRightTopY
             let cardBack: UIImageView = {
-                let height = width * 1.27
-                let cardBack = UIImageView(frame: CGRect(x: posX, y: posY, width: width, height: height))
-                let cardBackImage = UIImage(named: "card-back")!
+                let cardHeight = cardWidth * ratio
+                let cardBack = UIImageView(frame: CGRect(x: positionX, y: positionY, width: cardWidth, height: cardHeight))
                 cardBack.image = cardBackImage
                 return cardBack
             }()
             self.view.addSubview(cardBack)
-            posX += width + 2.5
+            positionX += cardWidth + widthPadding
         }
         
     }
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
 
 }
