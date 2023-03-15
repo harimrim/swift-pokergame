@@ -23,24 +23,27 @@ class GameBoardViewController: UIViewController {
         let cardLeftTopX:CGFloat = 0
         let cardRightTopY:CGFloat = 50
         let cardCount:CGFloat = 7
-        var positionX:CGFloat = cardLeftTopX
-        let cardWidth = (self.view.bounds.width / cardCount) - widthPadding
+        let viewWidth = self.view.bounds.width
+        let cardWidth = (viewWidth / cardCount) - widthPadding
         var cardBackImage:UIImage? = nil
         if let cardBack = UIImage(named: "card-back") {
             cardBackImage = cardBack
         }
+        var cardStackView:UIStackView = UIStackView()
+        cardStackView.axis = .horizontal
+        cardStackView.alignment = .fill
+        cardStackView.distribution = .fillEqually
+        cardStackView.spacing = widthPadding
         
         for _ in 0 ... 6 {
-            var positionY:CGFloat = cardRightTopY
-            let cardBack: UIImageView = {
-                let cardHeight = cardWidth * ratio
-                let cardBack = UIImageView(frame: CGRect(x: positionX, y: positionY, width: cardWidth, height: cardHeight))
-                cardBack.image = cardBackImage
-                return cardBack
-            }()
-            self.view.addSubview(cardBack)
-            positionX += cardWidth + widthPadding
+            let cardBack:UIImageView = UIImageView()
+            cardBack.contentMode = .scaleAspectFit
+            cardBack.image = cardBackImage
+            cardStackView.addArrangedSubview(cardBack)
         }
+        
+        cardStackView.frame = CGRect(x: cardLeftTopX, y: cardRightTopY, width: viewWidth, height: cardWidth)
+        self.view.addSubview(cardStackView)
         
     }
     
