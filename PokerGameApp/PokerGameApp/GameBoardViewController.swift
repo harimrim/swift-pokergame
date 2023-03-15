@@ -13,11 +13,15 @@ class GameBoardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg_pattern")!)
+        
+        if let backGroundPattern = UIImage(named: "bg_pattern") {
+            self.view.backgroundColor = UIColor(patternImage: backGroundPattern)
+        }
+        
         var posX:CGFloat = 0
         let width = (self.view.bounds.width / 7)-2.5
         for _ in 0 ... 6 {
-            var posY: CGFloat = 50
+            var posY:CGFloat = 50
             
             let cardBack: UIImageView = {
                 let height = width * 1.27
@@ -31,9 +35,9 @@ class GameBoardViewController: UIViewController {
         }
         
     }
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
     
 
 }
