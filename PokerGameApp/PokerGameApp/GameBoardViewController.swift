@@ -45,21 +45,55 @@ class GameBoardViewController: UIViewController {
         cardStackView.frame = CGRect(x: cardLeftTopX, y: cardRightTopY, width: viewWidth, height: cardWidth)
         self.view.addSubview(cardStackView)
         
+        print(heartQ.cardDescription())
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-
+    var heartQ = PokerCard(suit: .spade, rank: .K)
+    
 }
 
 class PokerCard {
+    // 연관된 계층 구조를 깔끔하게 표현하기 위해서 nested Type 사용
     enum Suit: Character {
         case spade = "♠"
         case heart = "♥"
         case diamond = "♦"
         case club = "♣"
+    }
+    // 카드의 랭크는 추후 승패를 위해 비교해야 하니 Int Type 사용
+    enum Rank: Int {
+        case A = 1, two, three, four, five, six, seven, eight, nine, ten, J, Q, K
+        
+        func convert() -> String {
+            switch self {
+            case.A:
+                return "A"
+            case.J:
+                return "J"
+            case.Q:
+                return "Q"
+            case.K:
+                return "K"
+            default:
+                return String(self.rawValue)
+            }
+        }
+    }
+    
+    var suit:Suit
+    var rank:Rank
+    
+    init(suit:Suit, rank:Rank) {
+        self.suit = suit
+        self.rank = rank
+    }
+    
+    func cardDescription() -> String {
+        return "\(suit.rawValue)\(rank.convert())"
     }
 }
 
