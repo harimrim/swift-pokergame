@@ -51,3 +51,12 @@ class GameBoardViewController: UIViewController {
 
 }
 
+class PokerCard {
+    enum Suit: Character {
+        case spade = "♠"
+        case heart = "♥"
+        case diamond = "♦"
+        case club = "♣"
+    }
+}
+
